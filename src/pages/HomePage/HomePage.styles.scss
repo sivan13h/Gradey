@@ -1,0 +1,29 @@
+.logo {
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.ant-layout-sider-children {
+  button {
+    margin-top: 2rem;
+  }
+}
+.chart-header {
+  font-size: 1.5rem;
+}
+
+.calcs {
+  display: flex;
+  margin-top: 1.5rem;
+  justify-content: center;
+  div {
+    padding: 0 10px;
+    color: rgb(212, 145, 19);
+  }
+}
