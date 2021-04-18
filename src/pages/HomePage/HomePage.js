@@ -1,14 +1,15 @@
 import React, { useContext, useState } from "react";
-import { Layout, Breadcrumb, Button, Modal } from "antd";
+import { Layout, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 
 import { GradesContext } from "../../context/GradesContext";
-import Chart from "../../components/Chart/Chart";
+
 import Sidebar from "../../components/Sidebar/Sidebar";
-import AddGradeForm from "../../components/AddGradeForm/AddGradeForm";
+import MainContent from "../../components/MainContent/MainContent";
+
 import "./HomePage.styles.scss";
 
-const { Header, Content, Sider } = Layout;
+const { Header, Sider } = Layout;
 
 function HomePage() {
   const { grades } = useContext(GradesContext);
@@ -18,7 +19,6 @@ function HomePage() {
   const showModal = () => {
     setIsModalVisible(true);
   };
-
   const handleOk = () => {
     setIsModalVisible(false);
   };
@@ -26,7 +26,6 @@ function HomePage() {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Sider>
@@ -38,44 +37,11 @@ function HomePage() {
             Add new grade
           </Button>
         </Header>
-        <Content style={{ margin: "0 16px" }}>
-          <Breadcrumb style={{ margin: "16px 0" }} />
-          <div
-            className="site-layout-background"
-            style={{ padding: 24, height: "500px" }}
-          >
-            <h1 className="chart-header">My Statistics</h1>
-            <Chart />
-            <div className="calcs">
-              <div>
-                Total Credits:{" "}
-                {grades
-                  .map((grade) => parseFloat(grade.credits))
-                  .reduce((a, b) => {
-                    return a + b;
-                  })}
-              </div>
-              <div>
-                Average Grade:{" "}
-                {(
-                  grades
-                    .map((grade) => parseFloat(grade.grade))
-                    .reduce((a, b) => {
-                      return a + b;
-                    }) / grades.length
-                ).toFixed(1)}
-              </div>
-            </div>
-          </div>
-          <Modal
-            title="Basic Modal"
-            visible={isModalVisible}
-            onOk={handleOk}
-            onCancel={handleCancel}
-          >
-            <AddGradeForm />
-          </Modal>
-        </Content>
+        <MainContent
+          isModalVisible={isModalVisible}
+          handleOk={handleOk}
+          handleCancel={handleCancel}
+        />
       </Layout>
     </Layout>
   );
