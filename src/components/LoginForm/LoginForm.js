@@ -5,12 +5,12 @@ import { UserContext } from "../../context/UserContext";
 import "./LoginForm.styles.scss";
 
 const LoginForm = () => {
-  const { updateCurrUser } = useContext(UserContext);
+  const { setCurrUser } = useContext(UserContext);
 
   const onFinish = (values) => {
     const jwt = authenticate(values.username, values.password);
     localStorage.setItem("currentUser", jwt);
-    updateCurrUser(jwt);
+    setCurrUser(jwt);
   };
 
   const onFinishFailed = (errorInfo) => {

@@ -14,14 +14,12 @@ function App() {
         <Route
           exact
           path="/home"
-          render={() => (currUser !== "" ? <HomePage /> : <Redirect to="/" />)}
+          render={() => (currUser ? <HomePage /> : <Redirect to="/" />)}
         />
         <Route
           exact
           path="/"
-          render={() =>
-            currUser.jwt ? <Redirect to="/home" /> : <LoginPage />
-          }
+          render={() => (currUser ? <Redirect to="/home" /> : <LoginPage />)}
         />
       </Switch>
     </div>

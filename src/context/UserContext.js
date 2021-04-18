@@ -5,9 +5,6 @@ export const UserContext = createContext();
 export function UserProvider(props) {
   const [currUser, setCurrUser] = useState("");
 
-  const updateCurrUser = (jwt) => {
-    setCurrUser(jwt);
-  };
   useEffect(() => {
     const currUserJwt = localStorage.getItem("currentUser");
 
@@ -17,7 +14,7 @@ export function UserProvider(props) {
   }, []);
 
   return (
-    <UserContext.Provider value={{ currUser, updateCurrUser }}>
+    <UserContext.Provider value={{ currUser, setCurrUser }}>
       {props.children}
     </UserContext.Provider>
   );

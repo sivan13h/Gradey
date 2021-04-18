@@ -11,7 +11,7 @@ const { Header, Content, Sider } = Layout;
 const { SubMenu } = Menu;
 
 function HomePage() {
-  const { updateCurrUser } = useContext(UserContext);
+  const { setCurrUser } = useContext(UserContext);
   const { grades } = useContext(GradesContext);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -30,7 +30,7 @@ function HomePage() {
 
   const handleLogout = () => {
     localStorage.setItem("currentUser", "");
-    updateCurrUser("");
+    setCurrUser("");
   };
 
   return (
