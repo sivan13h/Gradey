@@ -1,17 +1,37 @@
 import React, { useContext } from "react";
-import GradeDetails from "../../components/GradeDetails/GradeDetails";
-import GradesContext from "../../context/GradesContext";
-import "./Sidebar.styles.scss";
+import { Menu, Button } from "antd";
+import { UserContext } from "../../context/UserContext";
+import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
 
-export default function Sidebar() {
-  const { gradesData } = useContext(GradesContext);
+const { SubMenu } = Menu;
+
+export default function Sidebar(props) {
+  const { setCurrUser } = useContext(UserContext);
+  const handleLogout = () => {
+    localStorage.setItem("currentUser", "");
+    setCurrUser("");
+  };
   return (
-    <div className="sidebar">
-      <ul className="sidebar-list">
-        {gradesData.map((grade) => (
-          <GradeDetails data={grade} />
+    <>
+      <div className="logo">Gradey</div>
+      <Menu
+        className="menu"
+        theme="dark"
+        defaultSelectedKeys={["1"]}
+        mode="inline"
+      >
+        {props.grades.map((grade) => (
+          <SubMenu key={grade.id} icon={<UserOutlined />} title={grade.name}>
+            <Menu.Item key="3">Grade: {grade.grade}</Menu.Item>
+            <Menu.Item key="4">Credits: {grade.credits}</Menu.Item>
+            <Menu.Item key="5">Status: {grade.status}</Menu.Item>
+            <Menu.Item key="6">Date: {grade.date}</Menu.Item>
+          </SubMenu>
         ))}
-      </ul>
-    </div>
+      </Menu>
+      <Button onClick={handleLogout} type="primary" icon={<LogoutOutlined />}>
+        Logout
+      </Button>
+    </>
   );
 }
