@@ -1,8 +1,13 @@
-import { useContext } from "react";
-import { getGrades, addGrade } from "../../services/dataMethods";
-import { Form, Input, InputNumber, Button } from "antd";
-import { GradesContext } from "../../context/GradesContext";
+import { useContext, useState } from "react";
+import {
+  getGrades,
+  updateGrade,
+  deleteGrade,
+} from "../../services/dataMethods";
+import { Form, InputNumber, Button, Select } from "antd";
 
+import { GradesContext } from "../../context/GradesContext";
+const { Option } = Select;
 const layout = {
   labelCol: {
     span: 8,
@@ -25,12 +30,38 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-const AddGradeForm = () => {
-  const { setGrades } = useContext(GradesContext);
+const EditGradesForm = () => {
+  const { grades, setGrades } = useContext(GradesContext);
+  const [gradeToEdit, setGradeToEdit] = useState("");
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
-    await addGrade(values.grade);
+    await updateGrade(gradeToEdit.id, {
+      name: values.gradeName,
+      semester: values.grade.semester,
+      grade: values.grade.grade,
+      credits: values.grade.credits,
+    });
+    const updatedGrades = await getGrades();
+    setGrades(updatedGrades);
+    form.resetFields();
+  };
+
+  const onGradeChange = async (gradeName) => {
+    const grades = await getGrades();
+    const chosenGrade = grades.find((grade) => grade.name === gradeName);
+    setGradeToEdit(chosenGrade);
+    form.setFieldsValue({
+      grade: {
+        semester: chosenGrade.semester,
+        grade: chosenGrade.grade,
+        credits: chosenGrade.credits,
+      },
+    });
+  };
+
+  const handleRemove = async () => {
+    await deleteGrade(gradeToEdit.id);
     const updatedGrades = await getGrades();
     setGrades(updatedGrades);
     form.resetFields();
@@ -45,15 +76,21 @@ const AddGradeForm = () => {
       validateMessages={validateMessages}
     >
       <Form.Item
-        name={["grade", "name"]}
-        label="Name"
-        rules={[
-          {
-            required: true,
-          },
-        ]}
+        name="gradeName"
+        label="Grade Name"
+        rules={[{ required: true }]}
       >
-        <Input />
+        <Select
+          placeholder="Select a option and change input text above"
+          onChange={onGradeChange}
+          allowClear
+        >
+          {grades.map((grade) => (
+            <Option key={grade.id} value={grade.name}>
+              {grade.name}
+            </Option>
+          ))}
+        </Select>
       </Form.Item>
       <Form.Item
         name={["grade", "semester"]}
@@ -100,11 +137,14 @@ const AddGradeForm = () => {
 
       <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
         <Button type="primary" htmlType="submit">
-          Submit
+          Save
+        </Button>
+        <Button type="primary" onClick={handleRemove}>
+          Delete
         </Button>
       </Form.Item>
     </Form>
   );
 };
 
-export default AddGradeForm;
+export default EditGradesForm;

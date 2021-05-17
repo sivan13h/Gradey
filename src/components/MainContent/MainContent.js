@@ -1,13 +1,12 @@
 import React, { useContext } from "react";
-import { Layout, Breadcrumb, Modal } from "antd";
+import { Layout, Breadcrumb } from "antd";
 
 import Chart from "../../components/Chart/Chart";
-import AddGradeForm from "../../components/AddGradeForm/AddGradeForm";
+
 import { GradesContext } from "../../context/GradesContext";
 
 function MainContent(props) {
   const { Content } = Layout;
-
   const { grades } = useContext(GradesContext);
 
   return (
@@ -40,14 +39,6 @@ function MainContent(props) {
           </div>
         </div>
       </div>
-      <Modal
-        title="Basic Modal"
-        visible={props.isModalVisible}
-        onOk={props.handleOk}
-        onCancel={props.handleCancel}
-      >
-        <AddGradeForm />
-      </Modal>
     </Content>
   );
 }
