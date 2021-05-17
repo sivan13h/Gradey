@@ -23,7 +23,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "server": "json-server --watch grades.json",
+    "server": "npx json-server --watch database/db.json --port 8000",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

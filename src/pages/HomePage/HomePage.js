@@ -1,6 +1,6 @@
 import React, { useContext, useState } from "react";
 import { Layout, Button, Modal } from "antd";
-import { PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined, EditOutlined } from "@ant-design/icons";
 import AddGradeForm from "../../components/AddGradeForm/AddGradeForm";
 import EditGradesForm from "../../components/EditGradesForm/EditGradesForm";
 import { GradesContext } from "../../context/GradesContext";
@@ -16,6 +16,11 @@ function HomePage() {
   const { grades } = useContext(GradesContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [clickedEdit, setClickedEdit] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
+
+  const onCollapse = (collapsed) => {
+    setCollapsed(collapsed);
+  };
 
   const handleClick = (e) => {
     if (e.target.innerText === "Add new grade") {
@@ -39,12 +44,19 @@ function HomePage() {
   };
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Sider>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={onCollapse}
+        breakpoint="md"
+        collapsedWidth="0"
+      >
         <Sidebar grades={grades} />
       </Sider>
       <Layout className="site-layout">
         <Header className="site-layout-background" style={{ padding: 0 }}>
           <Button
+            className="add-button"
             type="primary"
             name="add"
             onClick={handleClick}
@@ -56,7 +68,7 @@ function HomePage() {
             type="secondary"
             onClick={handleClick}
             name="edit"
-            icon={<PlusOutlined />}
+            icon={<EditOutlined />}
           >
             Edit grades
           </Button>
@@ -67,7 +79,7 @@ function HomePage() {
           handleCancel={handleCancel}
         />
         <Modal
-          title="Basic Modal"
+          title={clickedEdit ? "Edit grade" : "Add grade"}
           visible={isModalVisible}
           onOk={handleOk}
           onCancel={handleCancel}

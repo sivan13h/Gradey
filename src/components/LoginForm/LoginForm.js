@@ -28,7 +28,7 @@ const LoginForm = () => {
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
       >
-        <h1 className="form-header">Please Log In</h1>
+        <h1 className="form-header">Please Sign-up or Log-in</h1>
         <Form.Item
           className="form-field"
           label="Username"

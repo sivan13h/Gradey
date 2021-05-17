@@ -45,7 +45,7 @@ export default function Chart() {
           left: 20,
           bottom: 5,
         }}
-        barCategoryGap={10}
+        barCategoryGap={20}
       >
         <CartesianGrid strokeDasharray="3 3" />
         {/* <XAxis
@@ -62,8 +62,8 @@ export default function Chart() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey="grade" fill="#8884d8" maxBarSize={20} />
-        <Bar dataKey="credits" fill="#82ca9d" maxBarSize={20} />
+        <Bar dataKey="grade" fill="#8884d8" maxBarSize={30} />
+        <Bar dataKey="credits" fill="#82ca9d" maxBarSize={30} />
       </BarChart>
     </ResponsiveContainer>
   );

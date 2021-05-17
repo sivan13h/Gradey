@@ -1,12 +1,13 @@
 import React, { useContext } from "react";
 import { Menu, Button } from "antd";
 import { UserContext } from "../../context/UserContext";
-import { UserOutlined, LogoutOutlined } from "@ant-design/icons";
+import { ReadOutlined, LogoutOutlined } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
 
 export default function Sidebar(props) {
   const { setCurrUser } = useContext(UserContext);
+
   const handleLogout = () => {
     localStorage.setItem("currentUser", "");
     setCurrUser("");
@@ -21,7 +22,7 @@ export default function Sidebar(props) {
         mode="inline"
       >
         {props.grades.map((grade) => (
-          <SubMenu key={grade.id} icon={<UserOutlined />} title={grade.name}>
+          <SubMenu key={grade.id} icon={<ReadOutlined />} title={grade.name}>
             <Menu.Item key="3">Grade: {grade.grade}</Menu.Item>
             <Menu.Item key="4">Credits: {grade.credits}</Menu.Item>
             <Menu.Item key="5">Status: {grade.status}</Menu.Item>

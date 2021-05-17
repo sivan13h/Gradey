@@ -7,6 +7,7 @@ import {
 import { Form, InputNumber, Button, Select } from "antd";
 
 import { GradesContext } from "../../context/GradesContext";
+import "./EditGradeForm.scss";
 const { Option } = Select;
 const layout = {
   labelCol: {
@@ -139,7 +140,7 @@ const EditGradesForm = () => {
         <Button type="primary" htmlType="submit">
           Save
         </Button>
-        <Button type="primary" onClick={handleRemove}>
+        <Button className="delete-button" type="danger" onClick={handleRemove}>
           Delete
         </Button>
       </Form.Item>
