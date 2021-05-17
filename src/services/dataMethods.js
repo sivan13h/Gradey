@@ -16,7 +16,7 @@ export const addGrade = async (newGrade) => {
 
 export const updateGrade = async (gradeId, updatedGrade) => {
   await axios.patch(
-    `https://gradey-api.herokuapp.com/grades${gradeId}`,
+    `https://gradey-api.herokuapp.com/grades/${gradeId}`,
     updatedGrade
   );
 };
