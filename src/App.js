@@ -16,6 +16,7 @@ function App() {
           path="/home"
           render={() => (currUser ? <HomePage /> : <Redirect to="/" />)}
         />
+        <Route exact path="/error" render={() => <div>esdfsdfrror</div>} />
         <Route
           exact
           path="/"

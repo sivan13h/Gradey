@@ -1,8 +1,20 @@
 import axios from "axios";
 
 export const getGrades = async () => {
-  const response = await axios.get("https://gradey-api.herokuapp.com/grades");
-  return response.data;
+  try {
+    const response = await axios.get("https://gradey-api.herokuapp.com/grades");
+    const gradesArr = response.data;
+    if (gradesArr.length > 0) {
+      return gradesArr;
+    } else {
+      return [
+        { name: "Example Grade", grade: 3, credits: 2, semester: 325253 },
+      ];
+    }
+  } catch (error) {
+    alert(error);
+    return [];
+  }
 };
 
 export const addGrade = async (newGrade) => {
@@ -15,12 +27,20 @@ export const addGrade = async (newGrade) => {
 };
 
 export const updateGrade = async (gradeId, updatedGrade) => {
-  await axios.patch(
-    `https://gradey-api.herokuapp.com/grades/${gradeId}`,
-    updatedGrade
-  );
+  try {
+    await axios.patch(
+      `https://gradey-api.herokuapp.com/grades/${gradeId}`,
+      updatedGrade
+    );
+  } catch (error) {
+    alert(error);
+  }
 };
 
 export const deleteGrade = async (gradeId) => {
-  await axios.delete(`https://gradey-api.herokuapp.com/grades/${gradeId}`);
+  try {
+    await axios.delete(`https://gradey-api.herokuapp.com/grades/${gradeId}`);
+  } catch (error) {
+    alert(error);
+  }
 };
