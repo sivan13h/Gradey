@@ -22,5 +22,5 @@ export const updateGrade = async (gradeId, updatedGrade) => {
 };
 
 export const deleteGrade = async (gradeId) => {
-  await axios.delete(`https://gradey-api.herokuapp.com/grades${gradeId}`);
+  await axios.delete(`https://gradey-api.herokuapp.com/grades/${gradeId}`);
 };

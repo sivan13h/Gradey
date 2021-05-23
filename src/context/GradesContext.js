@@ -1,5 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-
+import { Spin } from "antd";
 import { getGrades } from "../services/dataMethods";
 export const GradesContext = createContext();
 
@@ -24,7 +24,17 @@ export function GradesProvider(props) {
   return (
     <div>
       {loading ? (
-        <div>loading </div>
+        <div
+          style={{
+            position: "absolute",
+            top: "46%",
+            left: "46%",
+            textAlign: "center",
+          }}
+        >
+          <Spin size="large" style={{ marginBottom: "1rem" }} />
+          <h3>Loading...</h3>
+        </div>
       ) : (
         <GradesContext.Provider value={{ grades, setGrades }}>
           {props.children}
