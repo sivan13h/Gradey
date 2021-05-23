@@ -1,7 +1,4 @@
 import React, { useState, createContext, useEffect } from "react";
-import { Redirect } from "react-router";
-import LoginPage from "../pages/LoginPage/LoginPage";
-
 import { getGrades } from "../services/dataMethods";
 export const GradesContext = createContext();
 

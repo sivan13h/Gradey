@@ -18,12 +18,16 @@ export const getGrades = async () => {
 };
 
 export const addGrade = async (newGrade) => {
-  await axios.post("https://gradey-api.herokuapp.com/grades", {
-    name: newGrade.name,
-    semester: newGrade.semester,
-    grade: newGrade.grade,
-    credits: newGrade.credits,
-  });
+  try {
+    await axios.post("https://gradey-api.herokuapp.com/grades", {
+      name: newGrade.name,
+      semester: newGrade.semester,
+      grade: newGrade.grade,
+      credits: newGrade.credits,
+    });
+  } catch (error) {
+    alert(error);
+  }
 };
 
 export const updateGrade = async (gradeId, updatedGrade) => {
